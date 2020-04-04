@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
-    
   },
   "author": "Devin Carr",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "inquirer": "^7.1.0"
   }
 }
