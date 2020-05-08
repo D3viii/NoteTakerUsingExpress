@@ -30,7 +30,7 @@ app.post("/api/notes", function (req, res) {
 
     dbString = JSON.stringify(db);
 
-    fs.writeFile("db/db.json", dbString, "utf8", function (err) {
+    fs.writeFile("./db/db.json", dbString, "utf8", function (err) {
       if (err) throw err;
     });
 
@@ -46,7 +46,7 @@ app.delete("/api/notes/:id", function (req, res) {
     const notes = [];
     const id = req.params.id;
 
-    notes = fs.readFileSync("/db/db.json", "utf8");
+    notes = fs.readFileSync("./db/db.json", "utf8");
 
     notes = JSON.parse(notes);
 
