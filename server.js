@@ -42,30 +42,25 @@ app.post("/api/notes", function (req, res) {
 });
 
 app.delete("/api/notes/:id", function (req, res) {
-  try {
-    let notes = [];
-    const id = req.params.id;
-
-    notes = fs.readFileSync("./db/db.json", "utf8");
-
-    notes = JSON.parse(notes);
-
-    notes = notes.filter(function (note) {
-      return note.id != id;
-    });
-
-    const notesString = JSON.stringify(notes);
-
-    fs.writeFile("./db/db.json", notesString, "utf8", function (err) {
-      if (err) throw err;
-    });
-
-       res.json(notes);
-  
-  
-  } catch (err) {
-    throw err;
-  }
+  fs.readFile(path.join(__dirname, "db/db.json"), "utf8", function (err, data) {
+    const id = Number(req.params.id);
+    if (err) {
+      return console.log(err);
+    }
+    const notes = JSON.parse(data);
+    const notesPostDelete = notes.filter((note) => note.id !== id);
+    fs.writeFile(
+      path.join(__dirname, "db/db.json"),
+      JSON.stringify(notesPostDelete),
+      function (err) {
+        if (err) {
+          return console.log(err);
+        }
+        console.log("Delete Success!");
+        res.json(notesPostDelete);
+      }
+    );
+  });
 });
 
 app.get("*", function (req, res) {
