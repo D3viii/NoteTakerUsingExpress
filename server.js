@@ -42,30 +42,13 @@ app.post("/api/notes", function (req, res) {
 });
 
 app.delete("/api/notes/:id", function (req, res) {
-  try {
-    const notes = [];
-    const id = req.params.id;
-
-    notes = fs.readFileSync("db/db.json", "utf8");
-
-    notes = JSON.parse(notes);
-
-    notes = notes.filter(function (note) {
-      return note.id != id;
+    let currentNotes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+    let ID = req.params.id;
+    notesJSON = currentNotes.filter((current) => {
+      return current.id != ID;
     });
-
-    const notesString = JSON.stringify(notes);
-
-    fs.writeFile("./db/db.json", notesString, "utf8", function (err) {
-      if (err) throw err;
-    });
-
-       res.json(notes);
-  
-  
-  } catch (err) {
-    throw err;
-  }
+    fs.writeFileSync("./db/db.json", JSON.stringify(notesJSON));
+    res.json(notesJSON);
 });
 
 app.get("*", function (req, res) {
