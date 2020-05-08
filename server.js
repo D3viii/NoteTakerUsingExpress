@@ -43,7 +43,7 @@ app.post("/api/notes", function (req, res) {
 
 app.delete("/api/notes/:id", function (req, res) {
   try {
-    const notes = [];
+    let notes = [];
     const id = req.params.id;
 
     notes = fs.readFileSync("./db/db.json", "utf8");
