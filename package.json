@@ -1,15 +1,14 @@
 {
-  "name": "fe",
+  "name": "note-taker",
   "version": "1.0.0",
-  "description": "Note Taker Generator",
-  "main": "index.js",
+  "description": "",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Devin Carr",
+  "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
-    "inquirer": "^7.1.0"
+    "express": "^4.16.4"
   }
 }
