@@ -63,9 +63,8 @@ app.delete("/api/notes/:id", function (req, res) {
        res.json(notes);
   
   
-    } catch (err) {
+  } catch (err) {
     throw err;
-    console.log(err);
   }
 });
 
