@@ -59,15 +59,17 @@ app.delete("/api/notes/:id", function (req, res) {
     fs.writeFile("./db/db.json", notesString, "utf8", function (err) {
       if (err) throw err;
     });
+
+    res.json(notes);
   } catch (err) {
     throw err;
     console.log(err);
   }
 });
 
-app.get("*", function(req, res) {
-    res.sendFile(path.join(__dirname, "public/index.html"));
-  });
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "public/index.html"));
+});
 
 app.listen(PORT, () => {
   console.log(`App listening on http://localhost:${PORT}`);
