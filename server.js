@@ -41,6 +41,34 @@ app.post("/api/notes", function (req, res) {
   }
 });
 
+pp.delete("/api/notes/:id", function (req, res) {
+  try {
+    const notes = [];
+    const id = req.params.id;
+
+    notes = fs.readFileSync("./db/db.json", "utf8");
+
+    notes = JSON.parse(notes);
+
+    notes = notes.filter(function (note) {
+      return note.id != id;
+    });
+
+    const notesString = JSON.stringify(notes);
+
+    fs.writeFile("./db/db.json", notesString, "utf8", function (err) {
+      if (err) throw err;
+    });
+  } catch (err) {
+    throw err;
+    console.log(err);
+  }
+});
+
+app.get("*", function(req, res) {
+    res.sendFile(path.join(__dirname, "public/index.html"));
+  });
+  
 app.listen(PORT, () => {
   console.log(`App listening on http://localhost:${PORT}`);
 });
